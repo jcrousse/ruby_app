@@ -24,3 +24,7 @@ class Player
     @health + @name.length
   end
 end
+
+if __FILE__ == $0
+  puts Player.new("pepito", 18)
+end
