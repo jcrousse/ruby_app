@@ -35,4 +35,22 @@ describe Player do
     end
   end
 
+  context "strong player" do
+    before do
+      @initial_health = 150
+      @player = Player.new('Gonzalo', @initial_health)
+    end
+    it "is strong, so strong" do
+      expect(@player.strong?)
+    end
+  end
+  context "not so strong player" do
+    before do
+      @initial_health = 50
+      @player = Player.new('Pedro', @initial_health)
+    end
+    it "it is weak" do
+      not expect(@player.strong?)
+    end
+  end
 end

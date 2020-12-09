@@ -10,6 +10,10 @@ class Player
     "I'm #{@name} with a health of #{@health} and a score of #{score}"
   end
 
+  def strong?
+    @health > 100
+  end
+
   def blam
     puts "#{@name} got blammed!"
     @health -= 10
