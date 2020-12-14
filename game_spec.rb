@@ -14,14 +14,14 @@ describe Game do
 
   it "w00t when high" do
     allow_any_instance_of(Die).to receive(:roll).and_return(5)
-    @game.play
-    expect(@player.health).eql?(@initial_health + 15)
+    @game.play(2)
+    expect(@player.health).eql?(@initial_health + 15 * 2)
   end
 
   it "blams when low" do
     allow_any_instance_of(Die).to receive(:roll).and_return(1)
-    @game.play
-    @player.health.should == @initial_health - 10
+    @game.play(2)
+    expect(@player.health).eql?(@initial_health - 15 * 2)
   end
 
 end
