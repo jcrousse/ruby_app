@@ -35,5 +35,17 @@ class Game
 
     puts "\n#{@name} high scores:"
     @players.sort.each { |p| puts p.name.ljust(30, '.') + p.health.to_s}
+
+    @players.each do |player|
+      puts "\n#{player.name}'s point totals:"
+      puts "#{player.points} grand total points"
+      player.each_found_treasure do |treasure|
+        puts "#{treasure.points} total #{treasure.name} points"
+      end
+    end
+
+
+
   end
+
 end

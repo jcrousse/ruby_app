@@ -1,9 +1,10 @@
 class Player
   attr_accessor :name
-  attr_reader :health
+  attr_reader :health, :treasures
   def initialize(name, health=100)
     @name=name.capitalize
     @health=health
+    @treasures = Hash.new(0)
   end
 
   def to_s
@@ -25,11 +26,27 @@ class Player
   end
 
   def score
-    @health + @name.length
+    @health + points
+  end
+
+  def points
+    @treasures.values.reduce(0, :+)
+  end
+
+  def found_treasure(treasure)
+    @treasures[treasure.name] += treasure.points
+    puts "#{@name} found a #{treasure.name} worth #{treasure.points} points."
+    puts "#{@name}'s treasures: #{@found_treasures}"
   end
 
   def <=>(other_player)
     other_player.health <=> @health
+  end
+
+  def each_found_treasure
+    @treasures.each do |name, points|
+      yield Treasure.new(name, points)
+    end
   end
 end
 
