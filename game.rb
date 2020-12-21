@@ -12,6 +12,21 @@ class Game
     @players << player
   end
 
+  def high_score_entry(player)
+    formatted_name = player.name.ljust(20, '.')
+    "#{formatted_name} #{player.score}"
+  end
+
+  def save_high_scores(to_file="high_scores.txt")
+    File.open(to_file, "w") do |file|
+      file.puts "#{@title} High Scores:"
+      @players.each do |player|
+        file.puts high_score_entry(player)
+      end
+    end
+
+  end
+
   def play(rounds)
     treasures = TreasureTrove::TREASURES
     puts "There are #{treasures.length} treasures to be found:"
@@ -43,9 +58,12 @@ class Game
         puts "#{treasure.points} total #{treasure.name} points"
       end
     end
+  end
 
-
-
+  def load_players(csv_file)
+    File.readlines(csv_file).each do |line|
+      add_player(Player.from_csv(line))
+    end
   end
 
 end

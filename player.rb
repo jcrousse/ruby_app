@@ -48,6 +48,11 @@ class Player
       yield Treasure.new(name, points)
     end
   end
+
+  def self.from_csv(csv_line)
+    name, health = csv_line.split(',')
+    Player.new(name, Integer(health))
+  end
 end
 
 if __FILE__ == $0
